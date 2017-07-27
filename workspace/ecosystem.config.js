@@ -22,9 +22,9 @@ module.exports = {
   ],
   deploy : {
     production_react_app : {
-      user : 'node',
+      user : 'ec2-user',
       host : 'localhost',
-      ref  : 'origin/master',
+      ref  : 'origin/staging',
       repo : 'git@bitbucket.org:kv-newssocial/react-app.git',
       path : './react-app',
       'pre-setup': 'rm -rf react-app',
@@ -35,9 +35,9 @@ module.exports = {
         }
     },
     production_admin_app : {
-      user : 'node',
+      user : 'ec2-user',
       host : 'localhost',
-      ref  : 'origin/master',
+      ref  : 'origin/staging',
       repo : 'git@bitbucket.org:kv-newssocial/admin-app.git',
       path : './admin-app',
       'pre-setup': 'rm -rf admin-app',
@@ -48,14 +48,14 @@ module.exports = {
 	      }
     },
     production_node_api : {
-      user : 'node',
+      user : 'ec2-user',
       host : 'localhost',
-      ref  : 'origin/master',
+      ref  : 'origin/staging',
       repo : 'git@bitbucket.org:kv-newssocial/node-api.git',
       path : './node_api',
       'pre-setup': 'rm -rf node_api',
       'post-setup': 'npm install',
-      'post-deploy':'',
+      'post-deploy':'docker exec -it ecs-ecscompose-react-docker2-33-workspace-e0e0d792f8fa80cd7e00 bash -c "cd /var/www/app/node_api/source && pm2 restart api"',
 	    "env"  : {
         "NODE_ENV": "production"
       }
