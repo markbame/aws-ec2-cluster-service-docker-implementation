@@ -1,21 +1,22 @@
 version: '2'
 services:
   workspace:
-    image: 925336818186.dkr.ecr.eu-west-2.amazonaws.com/workspace:v6
+    image: 925336818186.dkr.ecr.eu-west-2.amazonaws.com/workspace:v7
     mem_limit: 800000000
     container_name: app_workspace
     tty: true
     command: 'tail -f /dev/null'
     volumes:
-       - /home/ec2-user/app/certs:/etc/nginx/certs
+       - /home/ec2-user/app:/var/www/app
   nginx:
-    image: 925336818186.dkr.ecr.eu-west-2.amazonaws.com/nginx:v17
+    image: 925336818186.dkr.ecr.eu-west-2.amazonaws.com/nginx:v27
     mem_limit: 200000000
     container_name: app_nginx
     volumes:
-       - /home/ec2-user/app:/etc/nginx
+       - /home/ec2-user/app/certs:/var/app
     ports:
         - "443:443"
+        - "80:80"
     links:
         - workspace
     command: 'nginx'
