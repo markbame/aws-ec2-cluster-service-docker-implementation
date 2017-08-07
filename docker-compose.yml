@@ -9,7 +9,7 @@ services:
     volumes:
        - /home/ec2-user/app:/var/www/app
   nginx:
-    image: 925336818186.dkr.ecr.eu-west-2.amazonaws.com/nginx:v27
+    image: 925336818186.dkr.ecr.eu-west-2.amazonaws.com/nginx:v30
     mem_limit: 200000000
     container_name: app_nginx
     volumes:
